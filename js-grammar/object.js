@@ -9,13 +9,13 @@ let game = {
     const currentTime = Date.now();
     const seconds = (currentTime - game.startTime) / 1000;
     if (9.5 <= seconds && seconds <= 10.5) {
-      game.displayArea.innerText = `${seconds}秒でした。すごい！`;
+      game.displayArea.innerText = seconds.toFixed(1) + '秒でした。すごい。';
     } else {
-      game.displayArea.innerText = `${seconds}秒でした。残念！`;
+      game.displayArea.innerText = seconds.toFixed(1) + '秒でした。残念。';
     }
   }
-}
+};
 
-if (confirm('OKを押して10秒だと思ったら何かキーを押して下さい')) {
+if (confirm('OKを押して10秒だと思ったら何かキーを押してください')) {
   game.start();
 }
