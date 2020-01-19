@@ -20,7 +20,6 @@ assessmentButton.onclick = () => {
   if (userName.length === 0) {
     return;
   }
-  console.log(userName);
 
   // 診断結果表示エリアの作成
   removeAllChildren(resultDivided);
@@ -29,12 +28,30 @@ assessmentButton.onclick = () => {
   resultDivided.appendChild(header);
 
   const paragraph = document.createElement('p');
-  const result = assessment(userName);
+  const result    = assessment(userName);
   paragraph.innerText = result;
   resultDivided.appendChild(paragraph);
 
   // TODO ツイートエリアの作成
   removeAllChildren(tweetDivided);
+  const anchor    = document.createElement('a');
+  const hrefValue = `https://twitter.com/intent/tweet?button_hashtag=${encodeURIComponent('あなたのいいところ')}&ref_src=twsrc%5Etfw`;
+
+  anchor.setAttribute('href', hrefValue);
+  anchor.className = 'twitter-hashtag-button';
+  anchor.setAttribute('data-text', result);
+  anchor.innerText = 'Tweet #あなたのいいところ';
+  tweetDivided.appendChild(anchor);
+
+  const script = document.createElement('script');
+  script.setAttribute('src', 'https://platform.twitter.com/widgets.js');
+  tweetDivided.appendChild(script);
+}
+
+userNameInput.onkeydown = (event) => {
+  if (event.key === 'Enter') {
+    assessmentButton.onclick();
+  }
 }
 
 const answers = [
